@@ -1,5 +1,4 @@
 require 'sinatra/base'
-
 module Sinatra
   module LinkHelper
     def link(name)
@@ -9,6 +8,7 @@ module Sinatra
       else "/page/#{name}"
       end
     end
-
-    helpers linkHelper
   end
+    helpers LinkHelper
+end
+

@@ -11,15 +11,4 @@ module Sinatra
   #register it via sinatra base
   register PostGet
 
-  module LinkHelper
-    def link(name)
-      case name
-      when :about then '/about'
-      when :index then '/index'
-      else "/page/#{name}"
-      end
-    end
-    helpers LinkHelper
-  end
-
 end
