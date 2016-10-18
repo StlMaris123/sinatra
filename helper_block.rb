@@ -13,7 +13,7 @@ end
     erb :index
   end
 
-  get '/index.html' do
+  get '/index' do
     redirect link(:index)
   end
   _END_
