@@ -1,9 +1,13 @@
 require 'sinatra/base'
+require 'github_hook'
 require 'ostruct'
 require 'time'
 class Blog < Sinatra::Base
-  set :root, File.expand_path('../../', _FILE_)
+  use GithubHook
+
+  set :root, File.expand_path('../../', __FILE__)
   set :article, []
+  set :app_file, __FILE__
 
   #loop through all the article files
   Dir.glob "{root}/articles/*.md" do |file|
@@ -32,11 +36,10 @@ class Blog < Sinatra::Base
 
   #sort articles by date, display new articles first
   articles.sort_by! { |article| article.date }  
+  articles.reverse!
 
-  article.reverse!
   get '/' do
     erb :index
   end
-
 
 end
