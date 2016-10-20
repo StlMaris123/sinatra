@@ -3,6 +3,7 @@ require 'ostruct'
 require 'time'
 class Blog < Sinatra::Base
   set :root, File.expand_path('../../', _FILE_)
+  set :article, []
 
   #loop through all the article files
   Dir.glob "{root}/articles/*.md" do |file|
@@ -25,6 +26,17 @@ class Blog < Sinatra::Base
     get "/#{article.slug}" do
       erb :post, :locals => {:article => article}
     end
+    # add article to alist of articles
+    articles << article
   end
+
+  #sort articles by date, display new articles first
+  articles.sort_by! { |article| article.date }  
+
+  article.reverse!
+  get '/' do
+    erb :index
+  end
+
 
 end
