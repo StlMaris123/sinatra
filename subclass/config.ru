@@ -1,2 +1,3 @@
-require "./my_app"
+require "./subclass.rb
+"
 run MyApp
